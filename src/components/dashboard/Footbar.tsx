@@ -39,7 +39,7 @@ export default function Footbar() {
               key={item.id}
               className={cn(
                 "flex-1 flex flex-col items-center justify-center py-4 px-6 text-sm font-medium transition-colors",
-                item.active ? "bg-blue-500 text-white" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
+                item.active ? "bg-sky-400 text-white" : "text-slate-600 hover:text-slate-900 hover:bg-slate-50",
               )}
             >
               <Icon className="w-5 h-5 mb-1" />

@@ -10,7 +10,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-blue-500 rounded-md flex items-center justify-center">
+            <div className="w-10 h-10 bg-sky-500 rounded-md flex items-center justify-center">
               <Plus className="w-10 h-10 text-white" />
             </div>
            <div className='flex  flex-col'>
