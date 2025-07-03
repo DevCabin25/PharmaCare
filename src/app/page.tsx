@@ -1,11 +1,10 @@
-import Image from "next/image";
-import under from "../../public/242462-P3LYBQ-600.jpg"
+import LoginPage from "./login/page";
 
 export default function Home() {
   return (
    <div className="">
-    <Image src={under} alt="under" ></Image>
-
+    <LoginPage/>
+   
 
    </div>
   );
