@@ -1,111 +1,114 @@
 "use client";
-import { useEffect, useState } from "react";
-import Head from "next/head";
 
-interface Pharmacy {
-  name: string;
-  address: string;
-  registrationNumber: string;
-  contact: string;
-  managerName: string;
-  openingHours: string;
-  status: "active" | "inactive";
-}
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import Image from "next/image"; // For QR image
 
-interface User {
-  name: string;
-  email: string;
-  avatarUrl?: string;
-}
-
-export default function ProfilePage() {
-  const [user, setUser] = useState<User | null>(null);
-  const [pharmacy, setPharmacy] = useState<Pharmacy | null>(null);
-
-  useEffect(() => {
-    const fakeUser: User = {
-      name: "Dr. Ahsan Ullah",
-      email: "ahsan@parmha.care",
-      avatarUrl: "https://i.pravatar.cc/150?img=7",
-    };
-
-    const fakePharmacy: Pharmacy = {
-      name: "Shifa Pharmacy",
-      address: "123/4 West Dhanmondi, Dhaka 1209, Bangladesh",
-      registrationNumber: "PH-BD-2025-0456",
-      contact: "+880 1723-123456",
-      managerName: "Dr. Ahsan Ullah",
-      openingHours: "9:00 AM – 10:00 PM",
-      status: "active",
-    };
-
-    setUser(fakeUser);
-    setPharmacy(fakePharmacy);
-  }, []);
-
-  if (!user || !pharmacy) return <div className="text-center py-10">Loading profile...</div>;
+export default function PharmacyProfile() {
+  const [pharmacy, setPharmacy] = useState({
+    name: "GreenLeaf Pharmacy",
+    regNo: "PHM-202543",
+    owner: "Dr. Fardin Ahmed",
+    location: "123/A Mirpur, Dhaka, Bangladesh",
+    description: "Serving community healthcare with quality medicines since 2010.",
+    totalMedicines: 148,
+    facebook: "https://facebook.com/greenleafpharmacy",
+    instagram: "https://instagram.com/greenleafpharmacy",
+    whatsapp: "https://wa.me/8801234567890",
+    qrImage: "/images/pharmacy-qr.png", // Replace with your actual QR code image path
+  });
 
   return (
-    <>
-      <Head>
-        <title>{user.name} | Parmha Care</title>
-      </Head>
-
-      <div className="min-h-screen bg-sky-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl overflow-hidden">
-          {/* Header */}
-          <div className="bg-sky-500 p-6 text-white text-center">
-            <img
-              src={user.avatarUrl}
-              alt={user.name}
-              className="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-lg"
-            />
-            <h2 className="text-2xl font-bold mt-4">{user.name}</h2>
-            <p className="text-sm">{user.email}</p>
+    <div className="max-w-5xl mx-auto p-6 space-y-8">
+      {/* Pharmacy Info */}
+      <Card>
+        <CardHeader>
+          <CardTitle>🏥 Pharmacy Information</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <div>
+            <Label>Pharmacy Name</Label>
+            <Input value={pharmacy.name} readOnly />
           </div>
-
-          {/* Pharmacy Info */}
-          <div className="p-6 bg-white space-y-6">
-            <h3 className="text-xl font-semibold text-sky-700">Pharmacy Information</h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <InfoCard label="Pharmacy Name" value={pharmacy.name} />
-              <InfoCard label="Registration No." value={pharmacy.registrationNumber} />
-              <InfoCard label="Address" value={pharmacy.address} />
-              <InfoCard label="Manager" value={pharmacy.managerName} />
-              <InfoCard label="Contact" value={pharmacy.contact} />
-              <InfoCard label="Opening Hours" value={pharmacy.openingHours} />
-              <InfoCard
-                label="Status"
-                value={
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-white text-sm ${
-                      pharmacy.status === "active" ? "bg-green-500" : "bg-red-500"
-                    }`}
-                  >
-                    {pharmacy.status.toUpperCase()}
-                  </span>
-                }
-              />
-            </div>
-
-            <div className="text-center pt-4">
-              <button className="bg-sky-600 hover:bg-sky-700 text-white font-medium px-6 py-2 rounded-lg transition">
-                Edit Pharmacy Info
-              </button>
-            </div>
+          <div>
+            <Label>Registration No</Label>
+            <Input value={pharmacy.regNo} readOnly />
           </div>
-        </div>
-      </div>
-    </>
-  );
-}
+          <div>
+            <Label>Owner Name</Label>
+            <Input value={pharmacy.owner} readOnly />
+          </div>
+          <div>
+            <Label>About Pharmacy</Label>
+            <Textarea value={pharmacy.description} readOnly />
+          </div>
+        </CardContent>
+      </Card>
 
-function InfoCard({ label, value }: { label: string; value: React.ReactNode }) {
-  return (
-    <div className="bg-gray-50 p-4 rounded-lg shadow-sm border border-gray-100">
-      <p className="text-sm text-gray-500">{label}</p>
-      <p className="text-base font-medium text-gray-800">{value}</p>
+      {/* Location */}
+      <Card>
+        <CardHeader>
+          <CardTitle>📍 Location</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Label>Address</Label>
+          <Textarea value={pharmacy.location} readOnly />
+        </CardContent>
+      </Card>
+
+      {/* Medicine Summary */}
+      <Card>
+        <CardHeader>
+          <CardTitle>📦 Medicine Overview</CardTitle>
+        </CardHeader>
+        <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div>
+            <p className="text-2xl font-bold">{pharmacy.totalMedicines}</p>
+            <p>Total Medicines</p>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Social Media Links */}
+      <Card>
+        <CardHeader>
+          <CardTitle>🌐 Social Media</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-2">
+          <div>
+            <Label>Facebook</Label>
+            <Input value={pharmacy.facebook} readOnly />
+          </div>
+          <div>
+            <Label>Instagram</Label>
+            <Input value={pharmacy.instagram} readOnly />
+          </div>
+          <div>
+            <Label>WhatsApp</Label>
+            <Input value={pharmacy.whatsapp} readOnly />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* QR Code */}
+      <Card>
+        <CardHeader>
+          <CardTitle>🔲 Pharmacy QR Code</CardTitle>
+        </CardHeader>
+        <CardContent className="flex items-center justify-center">
+          <Image
+            src={pharmacy.qrImage}
+            alt="Pharmacy QR Code"
+            width={150}
+            height={150}
+            className="rounded-md border shadow-sm"
+          />
+        </CardContent>
+      </Card>
     </div>
   );
 }
