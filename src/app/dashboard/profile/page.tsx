@@ -6,10 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import Image from "next/image"; // For QR image
+import Image from "next/image";
+import Link from "next/link";
 
 export default function PharmacyProfile() {
-  const [pharmacy, setPharmacy] = useState({
+  const [pharmacy] = useState({
     name: "GreenLeaf Pharmacy",
     regNo: "PHM-202543",
     owner: "Dr. Fardin Ahmed",
@@ -19,17 +20,17 @@ export default function PharmacyProfile() {
     facebook: "https://facebook.com/greenleafpharmacy",
     instagram: "https://instagram.com/greenleafpharmacy",
     whatsapp: "https://wa.me/8801234567890",
-    qrImage: "/images/pharmacy-qr.png", // Replace with your actual QR code image path
+    qrImage: "/images/pharmacy-qr.png",
   });
 
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
       {/* Pharmacy Info */}
-      <Card>
+      <Card className="shadow-md">
         <CardHeader>
-          <CardTitle>🏥 Pharmacy Information</CardTitle>
+          <CardTitle className="text-xl font-semibold">🏥 Pharmacy Information</CardTitle>
         </CardHeader>
-        <CardContent className="grid gap-4">
+        <CardContent className="grid md:grid-cols-2 gap-6">
           <div>
             <Label>Pharmacy Name</Label>
             <Input value={pharmacy.name} readOnly />
@@ -42,7 +43,7 @@ export default function PharmacyProfile() {
             <Label>Owner Name</Label>
             <Input value={pharmacy.owner} readOnly />
           </div>
-          <div>
+          <div className="md:col-span-2">
             <Label>About Pharmacy</Label>
             <Textarea value={pharmacy.description} readOnly />
           </div>
@@ -50,9 +51,9 @@ export default function PharmacyProfile() {
       </Card>
 
       {/* Location */}
-      <Card>
+      <Card className="shadow-md">
         <CardHeader>
-          <CardTitle>📍 Location</CardTitle>
+          <CardTitle className="text-xl font-semibold">📍 Location</CardTitle>
         </CardHeader>
         <CardContent>
           <Label>Address</Label>
@@ -61,51 +62,60 @@ export default function PharmacyProfile() {
       </Card>
 
       {/* Medicine Summary */}
-      <Card>
+      <Card className="shadow-md">
         <CardHeader>
-          <CardTitle>📦 Medicine Overview</CardTitle>
+          <CardTitle className="text-xl font-semibold">📦 Medicine Overview</CardTitle>
         </CardHeader>
-        <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-          <div>
-            <p className="text-2xl font-bold">{pharmacy.totalMedicines}</p>
-            <p>Total Medicines</p>
+        <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="bg-gray-50 rounded-xl shadow-sm py-6">
+            <p className="text-3xl font-bold text-primary">{pharmacy.totalMedicines}</p>
+            <p className="text-sm text-gray-500">Total Medicines</p>
           </div>
         </CardContent>
       </Card>
 
       {/* Social Media Links */}
-      <Card>
+      <Card className="shadow-md">
         <CardHeader>
-          <CardTitle>🌐 Social Media</CardTitle>
+          <CardTitle className="text-xl font-semibold">🌐 Social Media</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="grid md:grid-cols-2 gap-6">
           <div>
             <Label>Facebook</Label>
             <Input value={pharmacy.facebook} readOnly />
+            <Link href={pharmacy.facebook} target="_blank" className="text-blue-600 text-sm mt-1 inline-block hover:underline">
+              Visit Page
+            </Link>
           </div>
           <div>
             <Label>Instagram</Label>
             <Input value={pharmacy.instagram} readOnly />
+            <Link href={pharmacy.instagram} target="_blank" className="text-pink-500 text-sm mt-1 inline-block hover:underline">
+              Visit Profile
+            </Link>
           </div>
           <div>
             <Label>WhatsApp</Label>
             <Input value={pharmacy.whatsapp} readOnly />
+            <Link href={pharmacy.whatsapp} target="_blank" className="text-green-600 text-sm mt-1 inline-block hover:underline">
+              Chat on WhatsApp
+            </Link>
           </div>
         </CardContent>
       </Card>
 
       {/* QR Code */}
-      <Card>
+      <Card className="shadow-md">
         <CardHeader>
-          <CardTitle>🔲 Pharmacy QR Code</CardTitle>
+          <CardTitle className="text-xl font-semibold">🔲 Pharmacy QR Code</CardTitle>
         </CardHeader>
-        <CardContent className="flex items-center justify-center">
+        <CardContent className="flex justify-center">
           <Image
             src={pharmacy.qrImage}
             alt="Pharmacy QR Code"
-            width={150}
-            height={150}
-            className="rounded-md border shadow-sm"
+            width={180}
+            height={180}
+            className="rounded-lg border shadow-md"
           />
         </CardContent>
       </Card>
