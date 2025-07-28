@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Search, Plus, Edit, Trash2, Calendar, Package, MapPin } from "lucide-react"
+import Link from "next/link"
 
 interface Medicine {
   id: string
@@ -75,10 +76,10 @@ export default function InventoryPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-2xl font-semibold text-gray-900">Inventory</h1>
-          <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+          <Link href="/dashboard/add" className="bg-blue-600 flex items-center hover:bg-blue-700 px-4 py-2 rounded-2xl text-white">
             <Plus className="w-4 h-4 mr-2" />
             Add Medicine
-          </Button>
+          </Link>
         </div>
 
         {/* Search Bar */}
