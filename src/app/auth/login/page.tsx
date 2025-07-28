@@ -40,15 +40,6 @@ export default function LoginPage() {
     }, 1000)
   }
 
-  const fillDemoCredentials = (type: "owner" | "staff") => {
-    if (type === "owner") {
-      setEmail("admin@pharmacy.com")
-      setPassword("password")
-    } else {
-      setEmail("staff@pharmacy.com")
-      setPassword("password")
-    }
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
@@ -111,33 +102,19 @@ export default function LoginPage() {
               </Button>
             </form>
 
-            {/* Demo Accounts */}
+       
             <div className="mt-6 pt-4 border-t border-slate-200">
-              <p className="text-sm font-medium text-slate-700 mb-3">Demo Accounts:</p>
-              <div className="space-y-2 text-sm text-slate-600">
-                <div className="flex items-center justify-between">
-                  <span>Owner: admin@pharmacy.com / password</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => fillDemoCredentials("owner")}
-                    className="text-xs h-6 px-2"
-                  >
-                    Use
-                  </Button>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>Staff: staff@pharmacy.com / password</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => fillDemoCredentials("staff")}
-                    className="text-xs h-6 px-2"
-                  >
-                    Use
-                  </Button>
-                </div>
-              </div>
+              {/* Register Link */}
+<div className="text-center text-sm text-slate-600 mt-4">
+  Don’t have an account?{" "}
+  <a
+    href="/auth/register"
+    className="text-blue-600 hover:underline font-medium"
+  >
+    Register here
+  </a>
+</div>
+             
             </div>
           </CardContent>
         </Card>
